@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <div class="w-full h-screen flex bg-zinc-800 place-content-center">
+        <div class="form w-80 p-5 my-auto rounded-lg shadow-lg ">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input class="block px-2 py-3 w-full rounded-lg mb-3 font-semibold  outline-none bg-zinc-500 focus:bg-zinc-100 focus:font-normal"
+                    type="text" name="username" value="<%= user.username %>" required>
+                <input class="block px-2 py-3 w-full rounded-lg mb-3 font-semibold outline-none bg-zinc-500 focus:bg-zinc-100 focus:font-normal"
+                    type="text" name="name" value="<%= user.name %>" required>
+                <input class="block px-2 py-3 w-full rounded-lg mb-3 font-semibold outline-none bg-zinc-500 focus:bg-zinc-100 focus:font-normal"
+                    type="date" name="DOB" value="<%= user.DOB %>" required>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Change
+                    profile picture</label>
+                <input class="block w-full text-lg text-gray-900 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    aria-describedby="file_input_help" id="file_input" type="file" name="image">
+                <input
+                    class="block px-2 py-3 w-full outline-none rounded-lg mb-3 mt-3 bg-yellow-500 text-xl text-white font-bold hover:bg-yellow-600"
+                    type="submit" value="Update Changes">
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

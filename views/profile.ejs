@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="w-full min-h-screen bg-zinc-800 px-5 py-5 ">
+        <div class="relative bg-green-600 ">
+            <a href="/logout" class="absolute right-2 top-4 bg-red-500 px-4 py-1 rounded-md text-white"> Logout</a>
+        </div>
+        
+        <div class="flex gap-4 mb-2">
+            <div class=" w-10 h-10 mb-1 mt-4 rounded-full overflow-hidden">
+                <img class="w-full h-full object-cover"src="/images/uploads/<%= user.profileimage %>" alt="">
+            </div>
+            <h1 class="text-lg sm:text-3xl text-white font-semibold mt-5"><%=  user.name %> </h1>
+            <svg width="20" height="20" class="mt-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <a  href="/profile/edit" >
+                    <path d="M15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89H6.41421L15.7279 9.57627ZM17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785L17.1421 8.16206ZM7.24264 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L7.24264 20.89Z"></path>
+                </a>
+            </svg>
+                </div>
+        <h2 class="text-sm text-white "> Create Your new post </h2>
+
+        <form action="/createPost" method="post">
+            <textarea name="content" placeholder="What's on your mind"
+                class="bg-zinc-700 block resize-none p-3 border-[2px] border-zinc-800 mt-7 w-1/2 md:w-1/3 text-white"></textarea>
+            <input type="submit" class="my-5 px-4 py-1 bg-blue-500 text-white text-md rounded-md" value="Create post">
+        </form>
+
+        <div class="posts mt-5">
+            <h3 class="text-2xl text-zinc-400 font-semibold">Your Posts</h3>
+
+            <div class="postcontainer mt-7 rounded-md grid gap-3 grid-cols-2 md:grid-cols-3 ">
+            <% user.postId.forEach((e)=>{ %>
+
+                    <div class="post bg-zinc-700 p-3 rounded-md">
+                        <div class="flex justify-between">
+                            <h3 class="text-blue-500 text-sm font-semibold"> @<%= user.username %> </h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,256,256">
+                                <a href="/delete/<%= e._id %>">
+                                    <g fill="#eb4a29" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(10.66667,10.66667)"><path d="M10,2l-1,1h-6v2h18v-2h-6l-1,-1zM4.36523,7l1.70313,15h11.86328l1.70313,-15z"></path></g></g>
+                                </a>
+                                </svg>
+                        </div>
+                        <p class="truncate text-sm tracking-tighter text-white">
+                            <%= e.content %>
+                        </p>
+                        <small class="text-white"> <%= e.likes.length %> likes</small>
+                        <div class="flex gap-4">
+                            <a href="/like/<%= e._id %>" class="text-blue-500 text-sm hover:text-blue-700">
+                            <%= e.likes.indexOf(user._id) === -1 ? "like" : "unlike"   %>    
+                            </a>
+                            <a href="/edit/<%= e._id %>" class="text-zinc-400 text-sm"> Edit </a>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
